@@ -1,0 +1,52 @@
+/*
+ * popup.css
+ *
+ * Sets the popup body to its expected dimensions and font, then defers
+ * to globals.css for Tailwind layers and component styling.
+ */
+
+@import url('https://rsms.me/inter/inter.css');
+
+html, body, #scm-root {
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 13px;
+}
+
+body {
+  width: 480px;
+  height: 600px;
+  overflow: hidden;
+  background: #020617; /* slate-950 */
+  color: #f1f5f9;       /* slate-100 */
+}
+
+#scm-root {
+  width: 100%;
+  height: 100%;
+}
+
+/* Smooth scroll inside the popup */
+.scm-scroll, main {
+  scroll-behavior: smooth;
+}
+
+/* Subtle scrollbar styling */
+*::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+*::-webkit-scrollbar-thumb {
+  background: rgba(148, 163, 184, 0.25);
+  border-radius: 8px;
+}
+*::-webkit-scrollbar-thumb:hover {
+  background: rgba(148, 163, 184, 0.45);
+}

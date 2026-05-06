@@ -1,0 +1,90 @@
+/*
+ * globals.css
+ *
+ * Tailwind base + custom CSS variables. Imported by popup.jsx so Tailwind
+ * is available throughout the React tree. Keep this file thin — most
+ * styling lives inline as Tailwind utility classes on each component.
+ */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* CSS custom properties — themed but mostly used by inline styles */
+:root {
+  --scm-bg: #020617;
+  --scm-fg: #f1f5f9;
+  --scm-muted: #94a3b8;
+  --scm-accent: #6366f1;
+  --scm-card: #0f172a;
+  --scm-ring: #1e293b;
+}
+
+html.dark {
+  --scm-bg: #020617;
+  --scm-fg: #f1f5f9;
+  --scm-card: #0f172a;
+  --scm-ring: #1e293b;
+}
+
+html:not(.dark) {
+  --scm-bg: #f8fafc;
+  --scm-fg: #0f172a;
+  --scm-card: #ffffff;
+  --scm-ring: #e2e8f0;
+}
+
+@layer base {
+  * {
+    box-sizing: border-box;
+  }
+
+  button {
+    cursor: pointer;
+  }
+
+  body {
+    width: 560px;
+    background: var(--scm-bg);
+    color: var(--scm-fg);
+    font-feature-settings: 'cv11', 'ss01', 'ss03';
+  }
+
+  /* Focus ring for accessibility */
+  :focus-visible {
+    outline: 2px solid #818cf8;
+    outline-offset: 2px;
+    border-radius: 6px;
+  }
+}
+
+@layer components {
+
+  /* Smooth fade for any popping element */
+  .scm-fade-enter {
+    opacity: 0;
+    transform: translateY(2px);
+    transition: opacity 180ms ease-out, transform 180ms ease-out;
+  }
+
+  .scm-fade-enter-active {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Card-style base — applied via @apply to keep components terse */
+  .scm-card {
+    @apply rounded-xl ring-1 ring-slate-800 bg-slate-900/70 transition-colors;
+  }
+}
+
+/* Light mode overrides — keep them minimal because dark is the default */
+html:not(.dark) body {
+  background: #f8fafc;
+  color: #0f172a;
+}
+
+html:not(.dark) .scm-card {
+  background: #ffffff;
+  --tw-ring-color: rgba(15, 23, 42, 0.08);
+}

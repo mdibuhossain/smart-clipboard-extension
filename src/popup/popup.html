@@ -1,0 +1,19 @@
+<!doctype html>
+<!--
+  popup.html
+  Shell HTML for the Smart Clipboard Manager popup.
+  The React app is mounted into #scm-root by popup.jsx.
+-->
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data: https:; style-src 'self' 'unsafe-inline'; script-src 'self'; connect-src 'self';" />
+    <meta name="viewport" content="width=480" />
+    <title>Smart Clipboard Manager</title>
+    <link rel="stylesheet" href="./popup.css" />
+  </head>
+  <body class="dark">
+    <div id="scm-root"></div>
+    <script type="module" src="./popup.js"></script>
+  </body>
+</html>
