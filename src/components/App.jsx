@@ -173,7 +173,7 @@ function AppShell() {
       </header>
 
       {/* Body */}
-      <main ref={listRef} className="relative flex-1 overflow-y-auto px-3 py-3">
+      <main ref={listRef} className="relative flex-1 overflow-y-auto px-2 py-2">
         {loading ? (
           <SkeletonList count={3} />
         ) : results.length === 0 ? (
@@ -240,7 +240,7 @@ function VirtualGroups({
   };
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-2">
       {grouped.map((group) => {
         const isCollapsed = collapsed.has(group.key);
         const span = formatRange(group.start, group.end);
@@ -249,7 +249,7 @@ function VirtualGroups({
             <button
               type="button"
               onClick={() => toggle(group.key)}
-              className="w-full flex items-center gap-2 text-[10px] uppercase tracking-wide text-slate-500 hover:text-slate-300 mb-1.5"
+              className="w-full flex items-center gap-2 text-[10px] uppercase tracking-wide text-slate-500 hover:text-slate-300 mb-1"
             >
               <span>{isCollapsed ? '▸' : '▾'}</span>
               <span>{span}</span>
@@ -258,7 +258,7 @@ function VirtualGroups({
               <span className="flex-1 h-px bg-slate-800 ml-2" />
             </button>
             {!isCollapsed && (
-              <div className={viewMode === 'grid' ? 'grid grid-cols-2 gap-2.5' : 'flex flex-col gap-2'}>
+              <div className={viewMode === 'grid' ? 'grid grid-cols-2 gap-1.5' : 'flex flex-col gap-1.5'}>
                 {group.items.map((it) => {
                   const idx = results.findIndex((r) => r.id === it.id);
                   return (

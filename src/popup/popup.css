@@ -18,11 +18,29 @@ html {
 }
 
 body {
-  width: 480px;
-  height: 600px;
+  width: 560px;
+  height: 700px; /* default; overridden at runtime by resizeHandle.js */
+  min-height: 300px;
+  max-height: 800px;
   overflow: hidden;
   background: #020617; /* slate-950 */
   color: #f1f5f9;       /* slate-100 */
+}
+
+.scm-resize-handle {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 6px;
+  cursor: ns-resize;
+  z-index: 9999;
+  background: transparent;
+  transition: background 0.15s;
+}
+.scm-resize-handle:hover,
+.scm-resize-handle.dragging {
+  background: rgba(99, 102, 241, 0.45);
 }
 
 #scm-root {

@@ -9,6 +9,7 @@ import React from 'react';
 import { createRoot } from 'react-dom/client';
 import App from '../components/App.jsx';
 import '../styles/globals.css';
+import { installResizeHandle } from './resizeHandle.js';
 
 const container = document.getElementById('scm-root');
 if (!container) {
@@ -16,6 +17,7 @@ if (!container) {
 }
 const root = createRoot(container);
 root.render(<App />);
+installResizeHandle();
 
 // Helpful diagnostic: surface any unhandled errors in DevTools console
 // of the popup so users can include them when filing issues.

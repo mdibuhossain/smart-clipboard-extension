@@ -65,18 +65,18 @@ export default function ClipboardCard({
         ${isFocused
           ? 'ring-brand-400 bg-slate-800/80 shadow-glow'
           : 'ring-slate-800 bg-slate-900/70 hover:ring-slate-600 hover:bg-slate-800/60'}
-        ${layout === 'grid' ? 'p-3' : 'p-3 flex gap-3 items-start'}`}
+        ${layout === 'grid' ? 'p-2' : 'p-2 flex gap-2 items-start'}`}
     >
       {/* Type icon column for list layout */}
       {layout === 'list' && (
-        <div className="text-xl pt-0.5 select-none">{TYPE_ICONS[item.type] || '📦'}</div>
+        <div className="text-sm pt-0.5 select-none">{TYPE_ICONS[item.type] || '📦'}</div>
       )}
 
       <div className="flex-1 min-w-0">
         {/* Header row */}
-        <div className="flex items-start gap-2 mb-1.5">
+        <div className="flex items-start gap-1.5 mb-1">
           {layout === 'grid' && (
-            <span className="text-base leading-none mt-0.5 select-none">{TYPE_ICONS[item.type] || '📦'}</span>
+            <span className="text-xs leading-none mt-0.5 select-none">{TYPE_ICONS[item.type] || '📦'}</span>
           )}
           <div className="flex-1 min-w-0 flex items-center gap-1.5 text-[10px] text-slate-500">
             {item.sourceDomain && (
@@ -116,14 +116,14 @@ export default function ClipboardCard({
         </div>
 
         {/* Body */}
-        <div className="mb-2">
+        <div className="mb-1.5">
           {isImage ? (
-            <div className="rounded-md overflow-hidden ring-1 ring-slate-800 max-h-32 flex items-center justify-center bg-slate-950">
+            <div className="rounded-md overflow-hidden ring-1 ring-slate-800 max-h-24 flex items-center justify-center bg-slate-950">
               <img
                 loading="lazy"
                 src={item.preview || item.content}
                 alt="clipboard"
-                className="max-h-32 w-auto object-contain"
+                className="max-h-24 w-auto object-contain"
               />
             </div>
           ) : isUrl ? (
@@ -138,7 +138,7 @@ export default function ClipboardCard({
               {renderHighlights(segments)}
             </a>
           ) : (
-            <pre className={`whitespace-pre-wrap break-words text-[12px] leading-snug max-h-28 overflow-hidden ${isCode ? 'font-mono bg-slate-950/60 p-2 rounded-md ring-1 ring-slate-800 text-slate-200' : 'text-slate-200'}`}>
+            <pre className={`whitespace-pre-wrap break-words text-[11px] leading-snug max-h-20 overflow-hidden ${isCode ? 'font-mono bg-slate-950/60 p-1.5 rounded-md ring-1 ring-slate-800 text-slate-200' : 'text-slate-200'}`}>
               {renderHighlights(segments)}
             </pre>
           )}
@@ -160,11 +160,11 @@ export default function ClipboardCard({
         </div>
 
         {/* Actions */}
-        <div className="mt-2 flex items-center gap-1.5">
+        <div className="mt-1.5 flex items-center gap-1">
           <button
             type="button"
             onClick={handleCopy}
-            className="inline-flex items-center gap-1 rounded-md bg-brand-600 hover:bg-brand-500 transition-colors text-white text-[11px] font-medium px-2 py-1 shadow-soft"
+            className="inline-flex items-center gap-1 rounded-md bg-brand-600 hover:bg-brand-500 transition-colors text-white text-[10px] font-medium px-1.5 py-0.5 shadow-soft"
           >
             ⧉ Copy
           </button>
@@ -172,23 +172,23 @@ export default function ClipboardCard({
             <button
               type="button"
               onClick={(e) => { e.stopPropagation(); setConfirmDelete(true); }}
-              className="opacity-0 group-hover:opacity-100 transition-opacity rounded-md text-[11px] text-slate-400 hover:text-rose-300 px-2 py-1"
+              className="opacity-0 group-hover:opacity-100 transition-opacity rounded-md text-[10px] text-slate-400 hover:text-rose-300 px-1.5 py-0.5"
             >
               Delete
             </button>
           ) : (
-            <span className="inline-flex items-center gap-1.5 text-[11px]">
+            <span className="inline-flex items-center gap-1 text-[10px]">
               <button
                 type="button"
                 onClick={(e) => { e.stopPropagation(); onDelete?.(item.id); }}
-                className="rounded-md bg-rose-600 hover:bg-rose-500 text-white px-2 py-1"
+                className="rounded-md bg-rose-600 hover:bg-rose-500 text-white px-1.5 py-0.5"
               >
                 Confirm
               </button>
               <button
                 type="button"
                 onClick={(e) => { e.stopPropagation(); setConfirmDelete(false); }}
-                className="rounded-md bg-slate-800 ring-1 ring-slate-700 text-slate-300 px-2 py-1 hover:ring-slate-500"
+                className="rounded-md bg-slate-800 ring-1 ring-slate-700 text-slate-300 px-1.5 py-0.5 hover:ring-slate-500"
               >
                 Cancel
               </button>
@@ -206,7 +206,7 @@ function IconButton({ children, onClick, title, className = '' }) {
       type="button"
       onClick={onClick}
       title={title}
-      className={`opacity-60 hover:opacity-100 text-[12px] leading-none rounded-md p-1 hover:bg-slate-800/60 ${className}`}
+      className={`opacity-60 hover:opacity-100 text-[11px] leading-none rounded p-0.5 hover:bg-slate-800/60 ${className}`}
     >
       {children}
     </button>

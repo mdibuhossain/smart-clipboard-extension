@@ -32,7 +32,6 @@ ehthumbs.db
 Desktop.ini
 
 # Chrome extension packaging
-*.zip
 *.crx
 *.pem
 key.pem
