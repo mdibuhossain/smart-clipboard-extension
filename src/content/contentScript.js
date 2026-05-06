@@ -86,5 +86,51 @@
     }
   }, true);
 
+  // Poll for images written to the OS clipboard by external tools (Lightshot,
+  // Snipping Tool, etc.). These never fire a DOM copy event, so the listener
+  // above misses them. navigator.clipboard.read() needs a document context —
+  // it cannot be called from the MV3 service worker — so we poll here instead.
+  let lastImageHash = '';
+  let pollDenied = false;
+
+  async function hashBlob(blob) {
+    const buf = await blob.arrayBuffer();
+    const digest = await crypto.subtle.digest('SHA-256', buf);
+    return Array.from(new Uint8Array(digest))
+      .map((b) => b.toString(16).padStart(2, '0'))
+      .join('');
+  }
+
+  function blobToDataURL(blob) {
+    return new Promise((resolve, reject) => {
+      const r = new FileReader();
+      r.onload = () => resolve(r.result);
+      r.onerror = () => reject(r.error);
+      r.readAsDataURL(blob);
+    });
+  }
+
+  async function pollClipboardForImage() {
+    if (pollDenied || !document.hasFocus()) return;
+    try {
+      const data = await navigator.clipboard.read();
+      for (const item of data) {
+        const imageType = item.types.find((t) => t.startsWith('image/'));
+        if (!imageType) continue;
+        const blob = await item.getType(imageType);
+        const hash = await hashBlob(blob);
+        if (hash === lastImageHash) return;
+        lastImageHash = hash;
+        const dataUrl = await blobToDataURL(blob);
+        send({ image: dataUrl });
+        return;
+      }
+    } catch (err) {
+      if (err?.name === 'NotAllowedError') pollDenied = true;
+    }
+  }
+
+  setInterval(pollClipboardForImage, 1500);
+
   console.info(LOG, 'content script ready on', location.hostname);
 })();
